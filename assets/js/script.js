@@ -23,6 +23,15 @@ createApp({
       }
     },
 
+    changeFlag(index){
+      const data = new FormData();
+      data.append('indexToChange', index);
+      axios.post('server.php', data).then(result => {
+        this.tasks = result.data;
+        this.printTask();
+      })
+    },
+
     errorMessage(errorMsg){
       this.message = errorMsg;
       setTimeout(() => {
@@ -48,7 +57,6 @@ createApp({
     // Se nel database ho delle task, al mounted della pagina verranno prese tramite una chiamata api.get da server.php e salvate in this.tasks, poi verranno stampate nell'index tramite il v-for di vue
     printTask(){
       axios.get('server.php').then(result =>{
-        console.log(result);
         this.tasks = result.data;
       })
     }

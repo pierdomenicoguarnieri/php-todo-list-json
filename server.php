@@ -26,6 +26,14 @@ if(isset($_POST['indexToCancel'])){
   file_put_contents('database.json', json_encode($jsonTaskList, JSON_PRETTY_PRINT));
 }
 
+if(isset($_POST['indexToChange'])){
+  $indexToChange = $_POST['indexToChange'];
+
+  $jsonTaskList[$indexToChange]['flag'] = !$jsonTaskList[$indexToChange]['flag'];
+
+  file_put_contents('database.json', json_encode($jsonTaskList, JSON_PRETTY_PRINT));
+}
+
 $taskList = json_encode($jsonTaskList);
 
 echo $taskList;
