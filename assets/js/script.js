@@ -21,14 +21,16 @@ createApp({
       }, 5000);
     },
 
-    newTask(textNew){
-      const newTask = {
-        text: textNew,
-        done: false
-      }
-      if(textNew.length > 5){
-        this.tasks.unshift(newTask);
-        this.textNew = "";
+    newTask(){
+      if(this.textNew.length > 5){
+        const data = new FormData();
+        data.append('newTaskText', this.textNew);
+        axios.post('server.php', data).then(result => {
+          this.textNew = "";
+          this.tasks = result.data;
+          // Richiamo la funzione di stampa
+          this.printTask();
+        })
       }else{
         this.errorMessage("Il nome della task deve essere di almeno 5 caratteri!");
       }

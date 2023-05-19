@@ -19,8 +19,19 @@
         </div>
         
         <div class="pg-input-container mt-5 d-flex justify-content-center">
-          <input v-model.trim="textNew" @keyup.enter="newTask(textNew)" type="text" class="w-50 form-control me-3" id="text" placeholder="Aggiungi una task">
-          <button type="button" @click="newTask(textNew)" class="btn btn-outline-primary">Aggiungi</button>
+
+          <input
+            v-model.trim="textNew"
+            @keyup.enter="newTask()"
+            type="text"
+            class="w-50 form-control me-3"
+            id="text"
+            placeholder="Aggiungi una task">
+
+          <button
+            type="button"
+            @click="newTask()"
+            class="btn btn-outline-primary">Aggiungi</button>
         </div>
 
         <div class="pg-message-container text-danger fw-bold text-center mt-3">
@@ -29,13 +40,28 @@
         
         <div class="pg-todolist-container bg-light my-5 rounded-3">
           <ul v-if="tasks.length > 0" class="list-unstyled px-5 py-3">
-            <li v-for="(task, index) in tasks" @click="task.done = !task.done" class="py-3 border-bottom rounded-3 d-flex justify-content-between align-items-center">
-              <span :class="{'text-decoration-line-through' : task.done}" class="px-4 fs-5">{{task.text}}</span>
+
+            <li
+              v-for="(task, index) in tasks"
+              @click="task.done = !task.done"
+              class="py-3 border-bottom rounded-3 d-flex justify-content-between align-items-center">
+
+              <span
+                :class="{'text-decoration-line-through' : task.done}"
+                class="px-4 fs-5">
+                {{task.text}}
+              </span>
+
               <i @click.stop="deleteTask(index, task.done)" class="fa-regular fa-trash-can px-4 fs-5"></i>
             </li>
           </ul>
-          <div v-if="tasks.length == 0" class="pg-notask-message h-100 d-flex align-items-center">
+
+          <div
+            v-if="tasks.length == 0"
+            class="pg-notask-message h-100 d-flex align-items-center">
+
             <span class="fs-5 py-4 px-5">Non hai nessuna task da fare! &#128526;</span>
+
           </div>
         </div>
       </div>
