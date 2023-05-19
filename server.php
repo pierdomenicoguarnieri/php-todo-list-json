@@ -18,6 +18,14 @@ if(isset($_POST['newTaskText'])){
   file_put_contents('database.json', json_encode($jsonTaskList, JSON_PRETTY_PRINT));
 }
 
+if(isset($_POST['indexToCancel'])){
+  $indexToDelete = $_POST['indexToCancel'];
+
+  array_splice($jsonTaskList, $indexToDelete, 1);
+
+  file_put_contents('database.json', json_encode($jsonTaskList, JSON_PRETTY_PRINT));
+}
+
 $taskList = json_encode($jsonTaskList);
 
 echo $taskList;

@@ -11,7 +11,16 @@ createApp({
 
   methods: {
     deleteTask(index, done){
-      done ? this.tasks.splice(index, 1) : this.errorMessage("Non hai completato la task!")
+      if(done){
+        const data = new FormData();
+        data.append('indexToCancel', index);
+        axios.post('server.php', data).then(result => {
+          this.tasks = result.data;
+          this.printTask();
+        })
+      }else{
+        this.errorMessage("Non hai completato la task!");
+      }
     },
 
     errorMessage(errorMsg){
