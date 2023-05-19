@@ -40,7 +40,7 @@ createApp({
     },
 
     newTask(){
-      if(this.textNew.length > 5){
+      if(this.textNew.length >= 5){
         const data = new FormData();
         data.append('newTaskText', this.textNew);
         axios.post('server.php', data).then(result => {
