@@ -3,20 +3,7 @@ const {createApp} = Vue;
 createApp({
   data(){
     return{
-      tasks: [
-        {
-          text: "Lavare gli scogli",
-          done: true
-        },
-        {
-          text: "Asciugare gli scogli",
-          done: false
-        },
-        {
-          text: "Fare una focaccia",
-          done: false
-        },
-      ],
+      tasks: [],
       message: "",
       textNew: ""
     }
@@ -45,6 +32,17 @@ createApp({
       }else{
         this.errorMessage("Il nome della task deve essere di almeno 5 caratteri!");
       }
+    },
+    
+    // Se nel database ho delle task, al mounted della pagina verranno prese tramite una chiamata api.get da server.php e salvate in this.tasks, poi verranno stampate nell'index tramite il v-for di vue
+    printTask(){
+      axios.get('server.php').then(result =>{
+        console.log(result);
+        this.tasks = result.data;
+      })
     }
+  },
+  mounted(){
+    this.printTask()
   }
 }).mount("#app")
